@@ -9,9 +9,19 @@ public class Book {
     private double price;
     private String isbn;
     private String publisher;
+    private int quantity;
 
     public Book(){
+    }
 
+    public Book(String title, String author, double price, String isbn, String publisher,Category category, int quantity){
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.category = category;
+        this.quantity = quantity;
     }
 
     public String getTitle() {
@@ -60,5 +70,13 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

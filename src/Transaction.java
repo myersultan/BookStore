@@ -7,10 +7,10 @@ public class Transaction {
 
     private Book book;
     private Customer customer;
-    private Date buyDate;
+    private String buyDate;
     private int amount;
 
-    public Transaction(Book book, Customer customer, Date buyDate, int amount){
+    public Transaction(Book book, Customer customer, String  buyDate, int amount){
         this.book = book;
         this.customer = customer;
         this.buyDate = buyDate;
@@ -33,11 +33,11 @@ public class Transaction {
         this.customer = customer;
     }
 
-    public Date getBuyDate() {
+    public String getBuyDate() {
         return buyDate;
     }
 
-    public void setBuyDate(Date buyDate) {
+    public void setBuyDate(String buyDate) {
         this.buyDate = buyDate;
     }
 

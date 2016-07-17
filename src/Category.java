@@ -4,7 +4,7 @@
 
 public enum Category {
 
-    FANTASY(0), FOOD(1), COMPUTERS(2), FICTION(3), HISTORY(4);
+    FANTASY(0), COMPUTERS(1), FICTION(2), HISTORY(3);
 
     private int id;
 
