@@ -12,5 +12,7 @@ public class Launcher {
         store.lastWeek();
         System.out.println();
         store.lastDay();
+
+        BookStoreUI ui = new BookStoreUI(store);
     }
 }

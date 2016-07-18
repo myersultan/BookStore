@@ -1,7 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * Created by admin on 7/17/2016.
@@ -123,6 +121,15 @@ public class Store {
         }
        // System.out.println(" )");
         System.out.println("=======================================================");
+    }
+
+    public ArrayList<Book> getBooks(){
+        ArrayList<Book> list = new ArrayList<Book>();
+        for (int i = 0; i < storage.length; i++) {
+            list.add(storage[i]);
+        }
+        list.removeAll(Collections.singleton(null));
+        return list;
     }
 
 
