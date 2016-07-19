@@ -6,6 +6,8 @@ import java.util.*;
  */
 public class Store {
 
+    private int id = 1;
+
     private int positions = 100;
     private int custSize = 100;
     private int transSize = 100;
@@ -132,5 +134,14 @@ public class Store {
         return list;
     }
 
+    public void sell(Book book, Customer cust, int count){
+
+        Calendar calendar = new GregorianCalendar();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy hh:mm:ss");
+        String transTime = sdf.format(calendar.getTime());
+        System.out.println("id: " + id + " | " + transTime + " | " + count + " " + book.getTitle() + ": "
+                + book.getPrice()*count + " | " + cust.getName());
+        id++;
+    }
 
 }

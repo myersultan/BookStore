@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by admin on 7/18/2016.
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class BookStoreUI {
     private Book selectedBook;
     private Store store;
+    private int bookIndex;
 
     public BookStoreUI(Store store){
         this.store = store;
@@ -51,6 +53,7 @@ public class BookStoreUI {
             rb.setActionCommand(book.get(i).getTitle());
             Book bkk = book.get(i);
 
+
             rb.addActionListener(new ActionListener(){
 
                 @Override
@@ -65,6 +68,7 @@ public class BookStoreUI {
 
         }
 
+       // List<Book> books = store.getBooks();
 
         NumberFormat nf = NumberFormat.getNumberInstance();
         JFormattedTextField ftf = new JFormattedTextField(nf);
@@ -79,6 +83,11 @@ public class BookStoreUI {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                Customer c = new Customer();
+                c.setName(tfName.getText());
+                int count = Integer.parseInt(ftf.getText());
+
+                store.sell(selectedBook, c, count);
 
             }
         });
