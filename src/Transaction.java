@@ -10,6 +10,9 @@ public class Transaction {
     private String buyDate;
     private int amount;
 
+    public Transaction(){
+
+    }
     public Transaction(Book book, Customer customer, String  buyDate, int amount){
         this.book = book;
         this.customer = customer;

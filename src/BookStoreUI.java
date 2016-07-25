@@ -3,13 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by admin on 7/18/2016.
  */
 public class BookStoreUI {
+    private JFrame f;
+
     private Book selectedBook;
     private Store store;
     private int bookIndex;
@@ -17,15 +20,74 @@ public class BookStoreUI {
     public BookStoreUI(Store store){
         this.store = store;
 
-        JFrame f = new JFrame();
-        f.setMinimumSize(new Dimension(800, 600));
+        f = new JFrame();
+        f.setMinimumSize(new Dimension(600, 400));
         f.setLocation(300, 100);
 
-        f.getContentPane().add(createSellingPannel());
+        JMenuItem buyBooks = new JMenuItem("Buy Books");
+        buyBooks.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSellingForm();
+            }
+        });
+
+        JMenu menu = new JMenu("Books");
+        menu.add(buyBooks);
+
+        JMenuBar mb = new JMenuBar();
+        mb.add(menu);
+
+        f.getRootPane().setJMenuBar(mb);
+
+        f.getContentPane().add(createTransactionPanel());
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
         f.setVisible(true);
+    }
+
+
+    private void showSellingForm(){
+       f.getContentPane().removeAll();
+        f.getContentPane().add(createSellingPannel());
+
+        f.pack();
+        f.repaint();
+    }
+
+    private void showTransactionosPanel(){
+        f.getContentPane().removeAll();
+        f.getContentPane().add(createTransactionPanel());
+        f.pack();
+        f.repaint();
+    }
+
+
+    private JPanel createTransactionPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+
+        String[] columns = {"TID", "Date", "Book Name", "Price", "Customer"};
+        List<Transaction> transactions = store.getTransactions();
+
+        Object[][] data = new Object[transactions.size()][];
+        for (int i = 0; i < transactions.size(); i++) {
+            Transaction t = transactions.get(i);
+            Object[] co = new Object[]{i+1, t.getBuyDate(), t.getBook().getTitle(), t.getAmount(), t.getCustomer().getName()};
+            data[i] = co;
+        }
+
+        JTable transactionTable = new JTable(data, columns);
+        transactionTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+        transactionTable.getColumnModel().getColumn(1).setPreferredWidth(120);
+        transactionTable.getColumnModel().getColumn(2).setPreferredWidth(200);
+        transactionTable.getColumnModel().getColumn(3).setPreferredWidth(40);
+
+        JScrollPane scrollPane = new JScrollPane(transactionTable);
+        panel.add(scrollPane);
+
+        return panel;
     }
 
     private JPanel createSellingPannel(){
@@ -88,7 +150,7 @@ public class BookStoreUI {
                 int count = Integer.parseInt(ftf.getText());
 
                 store.sell(selectedBook, c, count);
-
+                showTransactionosPanel();
             }
         });
 

@@ -6,8 +6,6 @@ import java.util.*;
  */
 public class Store {
 
-    private int id = 1;
-
     private int positions = 100;
     private int custSize = 100;
     private int transSize = 100;
@@ -15,11 +13,14 @@ public class Store {
     private Book[] storage = new Book[positions];
     private Customer[] customer = new Customer[custSize];
     private Transaction[] transaction = new Transaction[transSize];
+    private List<Transaction> transactions;
+    private int transId = 1;
 
     public Store(){
         initBook();
         initCust();
         initTrans();
+        transactions = new ArrayList<>();
     }
 
     public void initBook(){
@@ -134,14 +135,32 @@ public class Store {
         return list;
     }
 
+    public List<Transaction> getTransactions() {
+        return new ArrayList<>(transactions);
+    }
+
+    public void addTransaction(Transaction t) {
+        transactions.add(t);
+    }
+
     public void sell(Book book, Customer cust, int count){
 
+        System.out.println("id: " + transId + " | " + getTime() + " | " + count + " " + book.getTitle() + ": "
+                + book.getPrice()*count + " | " + cust.getName());
+
+        Transaction t = new Transaction();
+        t.setBuyDate(getTime());
+        t.setBook(book);
+        t.setCustomer(cust);
+        t.setAmount((int) book.getPrice() * count);
+        addTransaction(t);
+        transId++;
+    }
+
+    private String getTime(){
         Calendar calendar = new GregorianCalendar();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy hh:mm:ss");
-        String transTime = sdf.format(calendar.getTime());
-        System.out.println("id: " + id + " | " + transTime + " | " + count + " " + book.getTitle() + ": "
-                + book.getPrice()*count + " | " + cust.getName());
-        id++;
+        return sdf.format(calendar.getTime());
     }
 
 }
