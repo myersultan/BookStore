@@ -9,15 +9,17 @@ public class Transaction {
     private Customer customer;
     private String buyDate;
     private int amount;
+    private int totalPrice;
 
     public Transaction(){
 
     }
-    public Transaction(Book book, Customer customer, String  buyDate, int amount){
+    public Transaction(Book book, Customer customer, String  buyDate, int amount, int totalPrice){
         this.book = book;
         this.customer = customer;
         this.buyDate = buyDate;
         this.amount = amount;
+        this.totalPrice = totalPrice;
     }
 
     public Book getBook() {
@@ -50,6 +52,14 @@ public class Transaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
 

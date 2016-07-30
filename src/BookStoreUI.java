@@ -68,21 +68,22 @@ public class BookStoreUI {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
 
-        String[] columns = {"TID", "Date", "Book Name", "Price", "Customer"};
+        String[] columns = {"TID", "Date", "Book Name","Amount", "Price", "Customer"};
         List<Transaction> transactions = store.getTransactions();
 
         Object[][] data = new Object[transactions.size()][];
         for (int i = 0; i < transactions.size(); i++) {
             Transaction t = transactions.get(i);
-            Object[] co = new Object[]{i+1, t.getBuyDate(), t.getBook().getTitle(), t.getAmount(), t.getCustomer().getName()};
+            Object[] co = new Object[]{i+1, t.getBuyDate(), t.getBook().getTitle(), t.getAmount(), t.getTotalPrice(), t.getCustomer().getName()};
             data[i] = co;
         }
 
         JTable transactionTable = new JTable(data, columns);
         transactionTable.getColumnModel().getColumn(0).setPreferredWidth(30);
-        transactionTable.getColumnModel().getColumn(1).setPreferredWidth(120);
+        transactionTable.getColumnModel().getColumn(1).setPreferredWidth(140);
         transactionTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-        transactionTable.getColumnModel().getColumn(3).setPreferredWidth(40);
+        transactionTable.getColumnModel().getColumn(3).setPreferredWidth(60);
+        transactionTable.getColumnModel().getColumn(4).setPreferredWidth(50);
 
         JScrollPane scrollPane = new JScrollPane(transactionTable);
         panel.add(scrollPane);

@@ -54,10 +54,10 @@ public class Store {
     }
 
     public void initTrans(){
-        transaction[0] = new Transaction(storage[0], customer[1], "12/07/2016", 2);
-        transaction[1] = new Transaction(storage[3], customer[3], "13/07/2016", 5);
-        transaction[2] = new Transaction(storage[9], customer[0], "18/07/2016", 3);
-        transaction[3] = new Transaction(storage[10], customer[2], "18/07/2016", 1);
+//        transaction[0] = new Transaction(storage[0], customer[1], "12/07/2016", 2);
+//        transaction[1] = new Transaction(storage[3], customer[3], "13/07/2016", 5);
+//        transaction[2] = new Transaction(storage[9], customer[0], "18/07/2016", 3);
+//        transaction[3] = new Transaction(storage[10], customer[2], "18/07/2016", 1);
     }
 
     public void getPrice(){
@@ -152,9 +152,20 @@ public class Store {
         t.setBuyDate(getTime());
         t.setBook(book);
         t.setCustomer(cust);
-        t.setAmount((int) book.getPrice() * count);
+        t.setAmount(count);
+        int total = (int) book.getPrice() * count;
+        t.setTotalPrice(checkDiscount(total));
         addTransaction(t);
         transId++;
+    }
+
+    private int checkDiscount(int total){
+        if(total >= 500 && total < 1000){
+            return (int)(total*0.95);
+        } if (total >= 1000){
+            return (int)(total*0.90);
+        }
+        return total;
     }
 
     private String getTime(){

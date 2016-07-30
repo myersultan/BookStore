@@ -1,9 +1,14 @@
+import java.awt.*;
+
 /**
  * Created by admin on 7/17/2016.
  */
 public class Launcher {
 
     public static void main(String[] args) throws Exception{
+        SplashScreen splash = SplashScreen.getSplashScreen();
+        Thread.sleep(5000);
+        splash.close();
         Store store = new Store();
 //        store.getPrice();
 //        System.out.println();
